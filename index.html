@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Web-Paint</title>
+    <title>PaintMe</title>
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
@@ -15,97 +15,97 @@
   <body>
 
     <button id="paintme-button">
-        <img src="./assets/icons/icons8_pencil_tip_1.svg" alt="">
+        <img src="./assets/icons/icons8_paint_palette.svg" alt="">
     </button>
     <div id="paintme">
       <!-- Navigation bar -->
-      <nav id="main-nav" class="navbar-paintme">
+      <nav id="main-nav" class="navbar-paintme" draggable="true">
         <div class="container-fluid">
           <!-- Shapes -->
           <ul id="shape-list" class="nav-paintme">
-            <li data-shape="rectangle">
+            <li class="nav-item-paintme" data-shape="rectangle">
               <a>
-                <i class="far fa-square"></i>
+                <img src="./assets/icons/icons8_rectangle_stroked.svg" alt="" />
               </a>
             </li>
-            <li data-shape="oval">
+            <li class="nav-item-paintme" data-shape="oval">
               <a>
-                <i class="far fa-compass"></i>
+                <img src="./assets/icons/icons8_ellipse_stroked.svg" alt="" />
               </a>
             </li>
-            <li data-shape="circle">
+            <li class="nav-item-paintme" data-shape="circle">
               <a>
-                <i class="far fa-circle"></i>
+                <img src="./assets/icons/icons8_circled.svg" alt="" />
               </a>
             </li>
-            <li data-shape="line">
+            <li class="nav-item-paintme" data-shape="line">
               <a>
-                <span class="glyphicon glyphicon-minus"></span>
-                <img src="./assets/icons/icons8_pencil_tip_1.svg" alt="" />
+                <img src="./assets/icons/icons8_line.svg" alt="" />
               </a>
             </li>
-            <li class="active" data-shape="lineList">
+            <li class="nav-item-paintme" class="active" data-shape="lineList">
               <a>
                 <span class="glyphicon glyphicon-pencil"></span>
+                <img src="./assets/icons/icons8_pencil_tip.svg" alt="" />
               </a>
             </li>
-            <li data-shape="text">
+            <li class="nav-item-paintme" data-shape="text">
               <a>
-                <span class="glyphicon glyphicon-text-width"></span>
+                <img src="./assets/icons/icons8_text.svg" alt="" />
               </a>
             </li>
-            <li data-shape="move">
+            <!-- <li class="nav-item-paintme" data-shape="move">
               <a>
-                <span class="glyphicon glyphicon-move"></span>
+                <img src="./assets/icons/icons8_text.svg" alt="" />
               </a>
-            </li>
+            </li> -->
           </ul>
           <!-- Settings -->
           <ul id="settings-list" class="nav-paintme">
-            <li>
+            <li class="nav-item-paintme">
               <a>
                 <input id="color-selector" type="color" />
               </a>
             </li>
-            <li>
-              <a data-toggle="modal" data-target="#size-modal">
-                <i class="fas fa-ruler-combined"></i>
+            <li class="nav-item-paintme">
+              <a data-toggle="modal" id="btn-size">
+                <img src="./assets/icons/icons8_positive_dynamic.svg" alt="" />
               </a>
             </li>
-            <li>
+            <li class="nav-item-paintme">
               <a id="fill-toggle" data-filled="no">
-                <i class="far fa-star"></i>
+                <img src="./assets/icons/icons8_bring_forward.svg" alt="" />
               </a>
             </li>
           </ul>
           <!-- IO -->
           <ul id="io-list" class="nav-paintme">
-            <li>
+            <li class="nav-item-paintme">
               <a id="img-save">
-                <span class="glyphicon glyphicon-download"></span>
+                <img src="./assets/icons/icons8_download_from_cloud.svg" alt="" />
               </a>
             </li>
-            <li>
+            <li class="nav-item-paintme">
               <a id="img-load">
-                <span class="glyphicon glyphicon-upload"></span>
-              </a>
-            </li>
-            <li>
-              <a id="img-clear">
-                <i class="fas fa-file"></i>
+                <img src="./assets/icons/icons8_upload_to_cloud.svg" alt="" />
               </a>
             </li>
           </ul>
           <!-- Undo + Redo -->
           <ul id="time-travel" class="nav-paintme">
-            <li>
-              <a id="btn-undo">
-                <i class="fas fa-undo"></i>
+            <li class="nav-item-paintme">
+              <a id="img-clear">
+                <img src="./assets/icons/icons8_file.svg" alt="" />
               </a>
             </li>
-            <li>
+            <li class="nav-item-paintme">
+              <a id="btn-undo">
+                <img src="./assets/icons/icons8_undo.svg" alt="" />
+              </a>
+            </li>
+            <li class="nav-item-paintme">
               <a id="btn-redo">
-                <i class="fas fa-redo"></i>
+                <img src="./assets/icons/icons8_redo.svg" alt="" />
               </a>
             </li>
           </ul>
@@ -114,7 +114,7 @@
 
       <!-- Canvas -->
       <div class="container-fluid">
-        <canvas id="canvas"> Your browser does not support canvas :( </canvas>
+        <canvas id="canvas"> Tu navegador no soporta esta aplicación :( </canvas>
       </div>
 
       <!-- Hidden modal for size adjustments -->
@@ -122,37 +122,37 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Modify sizes</h4>
-              <button type="button" class="close abort" data-dismiss="modal">
-                &times;
+                <h4 class="modal-title">Modificar tamaños</h4>
+              <button type="button" class="close btn-close-modal-size abort" data-dismiss="modal">
+                <img src="./assets/icons/icons8_multiply.svg" alt="">
               </button>
             </div>
             <div class="modal-body">
               <table class="table" id="size-table">
                 <tbody>
                   <tr id="font-row" data-value="12pt">
-                    <td>Font size</td>
+                    <td>Tamaño de fuente</td>
                     <td>
                       <a class="decrease">
                         <i class="fas fa-minus"></i>
                       </a>
                     </td>
-                    <td class="value-data">12pt</td>
-                    <td>
+                    <td class="value-data center">12pt</td>
+                    <td class="center">
                       <a class="increase">
                         <i class="fas fa-plus"></i>
                       </a>
                     </td>
                   </tr>
                   <tr id="width-row" data-value="1">
-                    <td>Line width</td>
+                    <td>Ancho de linea</td>
                     <td>
                       <a class="decrease">
                         <i class="fas fa-minus"></i>
                       </a>
                     </td>
-                    <td class="value-data">1</td>
-                    <td>
+                    <td class="value-data center">1</td>
+                    <td class="center">
                       <a class="increase">
                         <i class="fas fa-plus"></i>
                       </a>
@@ -164,17 +164,15 @@
             <div class="modal-footer">
               <button
                 type="button"
-                class="btn btn-default abort"
-                data-dismiss="modal"
+                class="btn btn-close-modal-size abort"
               >
-                Close
+                Cancelar
               </button>
               <button
                 type="button"
-                class="btn btn-default confirm"
-                data-dismiss="modal"
+                class="btn btn-close-modal-size confirm"
               >
-                Confirm
+                Aplicar
               </button>
             </div>
           </div>
