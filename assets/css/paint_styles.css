@@ -1,0 +1,133 @@
+/* Make background slightly darker so canvas is visible as white */
+body {
+    background-color: rgb(255, 0, 0);
+}
+
+#paintme-button{
+    background: #ffffff;
+    border: 1px solid #ffffff;
+    position: absolute;
+    z-index: 100;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 100px;
+    padding: 10px;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: 0 0 4px #ffffff;
+}
+#paintme.show{
+    display:block;
+}
+/* #paintme-button:active{
+    border: 1px solid #0a70cf;
+    background: #046ed1;
+}
+#paintme-button:active{
+    border: 1px solid #0f71cc;
+    background: #016dd1;
+} */
+#paintme-button img{
+    width: 50px;
+    height: 50px;
+}
+
+#paintme{
+    font-family: 'DM Sans', sans-serif;
+    display: none;
+}
+
+/* Center the canvas */
+#canvas {
+    background-color: rgba(255, 255, 255, 0.671);
+    padding: 0;
+    margin: auto;
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width:100%;
+    height: 100%;
+}
+
+
+
+/** CSS SET UP */
+
+.navbar-paintme{
+    position: absolute;
+    top: -6px;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container-fluid{
+    display: flex;
+    background: rgb(255, 255, 255);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.nav-paintme {
+    display: flex;
+    padding: 0 10px;
+    list-style: none;
+}
+.nav-paintme li{
+    border-radius: 100px;
+    border: 1px solid rgb(235, 235, 235);
+    min-width: 50px;
+    height: 50px;
+    margin: 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffff;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+}
+.nav-paintme li:hover{
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
+}
+.nav-paintme li img{
+    width: 40px;
+    height: 40px;
+}
+
+
+
+/** MODAL */
+.modal{
+    position: absolute;
+    z-index: 100;
+    background: #fff;
+    color: #333;
+    width: 500px;
+    height: auto;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px;
+    border-radius: 10px;
+    display: none;
+}
+.modal-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    height: 40px;
+    border-bottom: 1px solid rgb(216, 216, 216);
+}
+.modal-body{
+    padding: 20px 0;
+}
