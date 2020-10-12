@@ -21,3 +21,21 @@ btnPaintme.addEventListener("click", ()=>{
 btnSize.addEventListener("click", ()=>{
     modalSize.classList.toggle("show");
 });
+
+
+
+
+
+
+
+// Get a regular interval for drawing to the screen
+window.requestAnimFrame = (function (callback) {
+    return window.requestAnimationFrame || 
+       window.webkitRequestAnimationFrame ||
+       window.mozRequestAnimationFrame ||
+       window.oRequestAnimationFrame ||
+       window.msRequestAnimaitonFrame ||
+       function (callback) {
+    window.setTimeout(callback, 1000/60);
+       };
+})();

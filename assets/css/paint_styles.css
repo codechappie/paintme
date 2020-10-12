@@ -47,6 +47,11 @@ body {
 }
 #paintme{
     display: none;
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 /* Center the canvas */
@@ -84,6 +89,7 @@ body {
     background: rgb(255, 255, 255);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    border: 1px solid #f0f0f0;
 }
 .nav-paintme {
     display: flex;
@@ -210,7 +216,6 @@ a #color-selector{
         width: 100%;
         overflow-x: auto;
         border-radius: 0;
-        cursor: move;
         padding-top: 12px;
     }
     .container-fluid::-webkit-scrollbar{
