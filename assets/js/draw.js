@@ -104,13 +104,15 @@
 
     // region Mouse events
     // region Mouse down
-    drawer.canvas.addEventListener('mousedown',
-        /**
+    drawer.canvas.addEventListener('mousedown', MouseDownEvent);
+    drawer.canvas.addEventListener('touchstart', TouchStartEvent);
+
+     /**
          * Starts drawing the chosen shape.
          *
          * @param mouseEvent The event that trigger this callback
          */
-        function (mouseEvent) {
+        function MouseDownEvent (mouseEvent) {
             let pos = {x: mouseEvent.offsetX, y: mouseEvent.offsetY};
             switch (drawer.selectedShape) {
                 case drawer.availableShapes.RECTANGLE:
@@ -141,41 +143,109 @@
                     break;
             }
         }
-    );
+
+
+        /**
+         * Starts drawing the chosen shape.
+         *
+         * @param touchEvent The event that trigger this callback
+         */
+        function TouchStartEvent (touchEvent) {
+            let pos = {x: touchEvent.offsetX, y: touchEvent.offsetY};
+            switch (drawer.selectedShape) {
+                case drawer.availableShapes.RECTANGLE:
+                    drawer.selectedElement = new Rectangle(pos, drawer.currentSettings(), 0, 0);
+                    break;
+                case drawer.availableShapes.OVAL:
+                    drawer.selectedElement = new Oval(pos, drawer.currentSettings(), 0, 0);
+                    break;
+                case drawer.availableShapes.CIRCLE:
+                    drawer.selectedElement = new Circle(pos, drawer.currentSettings(), 0);
+                    break;
+                case drawer.availableShapes.LINE:
+                    drawer.selectedElement = new Line(pos, drawer.currentSettings(), pos);
+                    break;
+                case drawer.availableShapes.LINE_LIST:
+                    drawer.selectedElement = new LineList(pos, drawer.currentSettings());
+                    break;
+                case drawer.availableShapes.DrawnText:
+                    // If we are already drawing text, store that one
+                    if (drawer.selectedElement) {
+                        drawer.shapes.push(drawer.selectedElement);
+                        drawer.undoneShapes.splice(0, drawer.undoneShapes.length);
+                    }
+                    drawer.selectedElement = new DrawnText(pos, drawer.currentSettings());
+                    break;
+                case drawer.availableShapes.MOVE:
+                    // TODO
+                    break;
+            }
+        }
+
     // endregion
 
     // region Mouse move
-    drawer.canvas.addEventListener('mousemove',
-        /**
+    drawer.canvas.addEventListener('mousemove', MouseMoveEvent);
+    drawer.canvas.addEventListener('touchmove', TouchMoveEvent);
+
+     /**
          * If any shape other than text is being drawn, we resize it.
          *
          * @param mouseEvent The event that trigger this callback
          */
-        function (mouseEvent) {
+        function MouseMoveEvent (mouseEvent) {
             if (drawer.selectedElement && drawer.selectedShape !== drawer.availableShapes.DrawnText) {
                 drawer.selectedElement.resize(mouseEvent.offsetX, mouseEvent.offsetY);
                 drawer.redraw();
             }
         }
-    );
+
+         /**
+         * If any shape other than text is being drawn, we resize it.
+         *
+         * @param touchEvent The event that trigger this callback
+         */
+        function TouchMoveEvent (touchEvent) {
+            if (drawer.selectedElement && drawer.selectedShape !== drawer.availableShapes.DrawnText) {
+                drawer.selectedElement.resize(touchEvent.offsetX, touchEvent.offsetY);
+                drawer.redraw();
+            }
+        }
+
     // endregion
 
     // region Mouse up
-    document.addEventListener('mouseup',
-        /**
+    document.addEventListener('mouseup', MouseUpEvent);
+    document.addEventListener('touchend', TouchEndEvent);
+
+    /**
          * If any element is being drawn and it's not text, then
          * we store it when the mouse is released.
          *
          * @param mouseEvent  The event that trigger this callback
          */
-        function (mouseEvent) {
+        function MouseUpEvent (mouseEvent) {
             if (drawer.selectedElement && drawer.selectedShape !== drawer.availableShapes.DrawnText) {
                 drawer.shapes.push(drawer.selectedElement);
                 drawer.selectedElement = null;
                 drawer.undoneShapes.splice(0, drawer.undoneShapes.length);
             }
         }
-    );
+
+         /**
+         * If any element is being drawn and it's not text, then
+         * we store it when the mouse is released.
+         *
+         * @param touchEvent  The event that trigger this callback
+         */
+        function TouchEndEvent (touchEvent) {
+            if (drawer.selectedElement && drawer.selectedShape !== drawer.availableShapes.DrawnText) {
+                drawer.shapes.push(drawer.selectedElement);
+                drawer.selectedElement = null;
+                drawer.undoneShapes.splice(0, drawer.undoneShapes.length);
+            }
+        }
+
     // endregion
     // endregion
 
