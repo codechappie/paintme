@@ -1,6 +1,7 @@
 /* Make background slightly darker so canvas is visible as white */
-body {
-    background-color: rgb(255, 255, 255);
+.bg-paint-me {
+    background: transparent;
+    overflow-x: hidden;
 }
 
 #paintme-button{
@@ -232,4 +233,4 @@ a #color-selector{
     .modal{
         width: 85%;
     }
-}
+/*  */}
