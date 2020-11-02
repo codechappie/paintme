@@ -1,4 +1,7 @@
 /* Make background slightly darker so canvas is visible as white */
+html{
+ overflow: hidden;   
+}
 .bg-paint-me {
     background: rgb(255, 255, 255);
     overflow-x: hidden;
@@ -57,7 +60,7 @@
 
 /* Center the canvas */
 #canvas {
-    background-color: rgba(255, 255, 255, 0.671);
+    background-color: transparent;
     padding: 0;
     margin: auto;
     display: block;
