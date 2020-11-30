@@ -74,18 +74,18 @@ window.addEventListener("DOMContentLoaded", () => {
   });
   btnBgWhite.addEventListener("click", () => {
     canvas.style.background = "white";
-    canvas.style.backgroundImage = "url('./assets/images/white.png')";   
+    canvas.style.backgroundImage = "url('../images/white.png')";   
   });
   btnBgSquared.addEventListener("click", () => {
     canvas.style.background = "white";
     canvas.style.backgroundSize = "200px 200px";
-    canvas.style.backgroundImage = "url('./assets/images/grid-pattern.png')";
+    canvas.style.backgroundImage = "url('../images/grid-pattern.png')";
     canvas.style.transition = "background .2s ease-in-out";
   });
   btnBgLined.addEventListener("click", () => {
     canvas.style.background = "white";
     canvas.style.backgroundSize = "600px 600px";
-    canvas.style.backgroundImage = "url('./assets/images/lined.png')";
+    canvas.style.backgroundImage = "url('../images/lined.png')";
     canvas.style.transition = "background .2s ease-in-out";
   });
   
