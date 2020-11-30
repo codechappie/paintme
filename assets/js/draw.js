@@ -26,6 +26,7 @@
       CIRCLE: "circle",
       LINE: "line",
       LINE_LIST: "lineList",
+      ERASE_LIST: "eraseList",
       DrawnText: "text",
       MOVE: "move", // TODO
     },
@@ -33,8 +34,8 @@
     settings: {
       color: "#000000",
       filled: false,
-      width: 1,
-      font: "12pt sans-serif",
+      width: 10,
+      font: "36pt sans-serif",
     },
     /**
      * Deep copy of settings.
@@ -49,6 +50,15 @@
         font: drawer.settings.font.slice(0, drawer.settings.font.length),
       };
     },
+    currentSettingsEraser: function () {
+      return {
+        color: drawer.settings.color.slice(0, drawer.settings.color.length),
+        filled: drawer.settings.filled,
+        width: drawer.settings.width + 10,
+        font: drawer.settings.font.slice(0, drawer.settings.font.length),
+      };
+    },
+
     /**
      * Draw all stored shapes.
      */
@@ -108,7 +118,7 @@
   let pos;
 
   // Set up touch events for mobile, etc
-  canvas.addEventListener(
+  drawer.canvas.addEventListener(
     "touchstart",
     function (e) {
       mousePos = getTouchPos(canvas, e);
@@ -117,19 +127,19 @@
         clientX: touch.clientX,
         clientY: touch.clientY,
       });
-      canvas.dispatchEvent(mouseEvent);
+      drawer.canvas.dispatchEvent(mouseEvent);
     },
     false
   );
-  canvas.addEventListener(
+  drawer.canvas.addEventListener(
     "touchend",
     function (e) {
       var mouseEvent = new MouseEvent("mouseup", {});
-      canvas.dispatchEvent(mouseEvent);
+      drawer.canvas.dispatchEvent(mouseEvent);
     },
     false
   );
-  canvas.addEventListener(
+  drawer.canvas.addEventListener(
     "touchmove",
     function (e) {
       var touch = e.touches[0];
@@ -137,7 +147,7 @@
         clientX: touch.clientX,
         clientY: touch.clientY,
       });
-      canvas.dispatchEvent(mouseEvent);
+      drawer.canvas.dispatchEvent(mouseEvent);
     },
     false
   );
@@ -188,6 +198,9 @@
         case drawer.availableShapes.LINE_LIST:
           drawer.selectedElement = new LineList(pos, drawer.currentSettings());
           break;
+        case drawer.availableShapes.ERASE_LIST:
+            drawer.selectedElement = new EraseList(pos, drawer.currentSettingsEraser());
+            break;
         case drawer.availableShapes.DrawnText:
           // If we are already drawing text, store that one
           if (drawer.selectedElement) {
@@ -287,10 +300,39 @@
         } else {
           drawer.undo();
         }
-      }
+      } 
     }
   );
   // endregion
+
+
+
+  document.addEventListener(
+    "keydown",
+    /**
+     * If a key is pressed, we first check to see if a text
+     * is being drawn and if so, handle that accordingly. If
+     * not, we check for undo and redo combos.
+     *
+     * @param evt The event that triggered this callback
+     */
+    function (evt) {
+      if (
+        drawer.selectedShape === drawer.availableShapes.DrawnText &&
+        drawer.selectedElement
+      ) {
+        let key = evt.key;
+        if (key === "Backspace") {
+          drawer.selectedElement.resize(key);
+          drawer.redraw();
+        } else {
+          // console.log("borrando")
+        }
+      }
+    }
+  );
+
+
 
   // region OnClick events
 
@@ -321,15 +363,19 @@
          * @param evt The event that triggered this callback
          */
         function (evt) {
+          if (filled.dataset["filled"] === "no") {
+            drawer.settings.filled = false;
+          } 
           let clickedShape = elem.dataset.shape;
+          if (
+           clickedShape === drawer.availableShapes.DrawnText
+          ) {
+            drawer.settings.filled = true;
+            drawer.shapes.push(drawer.selectedElement);
+            drawer.undoneShapes.splice(0, drawer.undoneShapes.length);
+          }
           if (clickedShape !== drawer.selectedShape) {
-            if (
-              drawer.selectedElement &&
-              drawer.selectedShape === drawer.availableShapes.DrawnText
-            ) {
-              drawer.shapes.push(drawer.selectedElement);
-              drawer.undoneShapes.splice(0, drawer.undoneShapes.length);
-            }
+
             drawer.selectedElement = null;
             drawer.selectedShape = clickedShape;
 
@@ -347,7 +393,6 @@
   // region Filled setting
   // On click event for the star (which is either filled or not)
   let filled = document.getElementById("fill-toggle");
-  console.log(filled.firstChild);
   filled.addEventListener(
     "click",
     /**
@@ -360,6 +405,7 @@
     function (evt) {
       filled.firstElementChild.classList.toggle("far");
       filled.firstElementChild.classList.toggle("fas");
+      // filled.classList("active");
       if (filled.dataset["filled"] === "no") {
         filled.dataset["filled"] = "yes";
         drawer.settings.filled = true;
@@ -403,7 +449,7 @@
      * @param evt The event that triggered this callback
      */
     function (evt) {
-      widthValue.innerHTML = Math.max(1, parseInt(widthValue.innerHTML) - 1);
+      widthValue.innerHTML = Math.max(1, parseInt(widthValue.innerHTML) - 4);
     }
   );
   widthIncrease.addEventListener(
@@ -414,7 +460,7 @@
      * @param evt The event that triggered this callback
      */
     function (evt) {
-      widthValue.innerHTML = Math.min(50, parseInt(widthValue.innerHTML) + 1);
+      widthValue.innerHTML = Math.min(70, parseInt(widthValue.innerHTML) + 4);
     }
   );
   // endregion
@@ -434,7 +480,7 @@
      */
     function (evt) {
       fontValue.innerHTML = ((s) =>
-        Math.max(6, parseInt(s.slice(0, s.length - 2)) - 1) + "pt")(
+        Math.max(6, parseInt(s.slice(0, s.length - 2)) - 4) + "pt")(
         fontValue.innerHTML
       );
     }
@@ -448,7 +494,7 @@
      */
     function (evt) {
       fontValue.innerHTML = ((s) =>
-        Math.min(42, parseInt(s.slice(0, s.length - 2)) + 1) + "pt")(
+        Math.min(70, parseInt(s.slice(0, s.length - 2)) + 4) + "pt")(
         fontValue.innerHTML
       );
     }
@@ -581,6 +627,13 @@
         }
         drawer.shapes.push(ll);
         break;
+      case "EraseList":
+          let eli = new EraseList(jsonShape.position, jsonShape.settings);
+          for (let j = 0; j < jsonShape.xList.length; j++) {
+            eli.resize(jsonShape.xList[j], jsonShape.yList[j]);
+          }
+          drawer.shapes.push(eli);
+          break;
       case "DrawnText":
         let dt = new DrawnText(jsonShape.position, jsonShape.settings);
         for (let j = 0; j < jsonShape.chars.length; j++) {

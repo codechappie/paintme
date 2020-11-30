@@ -68,6 +68,7 @@ class Rectangle extends Shape {
 
     /** @inheritDoc */
     render(ctx) {
+        ctx.globalCompositeOperation="source-over";
         super.render(ctx);
         if (this.settings.filled) {
             ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
@@ -110,6 +111,7 @@ class Oval extends Shape {
 
     /** @inheritDoc */
     render(ctx) {
+        ctx.globalCompositeOperation="source-over";
         super.render(ctx);
         ctx.beginPath();
         let c_x = (this.position.x + this.x) / 2;
@@ -179,6 +181,7 @@ class Line extends Shape {
 
     /** @inheritDoc */
     render(ctx) {
+        ctx.globalCompositeOperation="source-over";
         super.render(ctx);
         ctx.beginPath();
         ctx.moveTo(this.position.x, this.position.y);
@@ -215,6 +218,7 @@ class LineList extends Shape {
 
     /** @inheritDoc */
     render(ctx) {
+        ctx.globalCompositeOperation="source-over";
         super.render(ctx);
         ctx.beginPath();
         ctx.moveTo(this.position.x, this.position.y);
@@ -239,6 +243,54 @@ class LineList extends Shape {
 }
 // endregion
 
+
+
+// region EraseList
+/**
+ * A drawable list of smoothed line segments.
+ */
+class EraseList extends Shape {
+    /**
+     * Create a new EraseList.
+     *
+     * @param position The x and y position of the shape
+     * @param settings Various settings for drawing the shape {color, filled, width, font}
+     */
+    constructor(position, settings) {
+        super(position, settings);
+        // All coordinates are kept in two separated arrays
+        this.xList = [];
+        this.yList = [];
+    }
+
+    /** @inheritDoc */
+    render(ctx) {
+        super.render(ctx);
+        ctx.beginPath();
+        ctx.globalCompositeOperation="destination-out";
+        ctx.moveTo(this.position.x, this.position.y);
+        // Segments are smoothed using quadratic curves
+        for (let i = 0; ; i++) {
+            if (i > this.xList.length - 1) {
+                ctx.quadraticCurveTo(this.xList[i], this.yList[i], this.xList[i+1], this.yList[i+1]);
+                break;
+            }
+            let center = {x: (this.xList[i] + this.xList[i + 1]) / 2, y: (this.yList[i] + this.yList[i + 1]) / 2};
+            ctx.quadraticCurveTo(this.xList[i], this.yList[i], center.x, center.y);
+        }
+        ctx.stroke();
+        ctx.closePath();
+    }
+
+    /** @inheritDoc */
+    resize(x, y) {
+        this.xList.push(x);
+        this.yList.push(y);
+    }
+}
+// endregion
+
+
 // region DrawnText
 /**
  * A drawable text.
@@ -258,11 +310,12 @@ class DrawnText extends Shape {
 
     /** @inheritDoc */
     render(ctx) {
+        ctx.globalCompositeOperation="source-over";
         super.render(ctx);
         if (this.settings.filled) {
             ctx.fillText(this.chars.join(''), this.position.x, this.position.y);
         } else {
-            ctx.strokeText(this.chars.join(''), this.position.x, this.position.y);
+            ctx.fillText(this.chars.join(''), this.position.x, this.position.y);
         }
     }
 
