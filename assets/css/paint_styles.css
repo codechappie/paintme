@@ -124,13 +124,13 @@
 }
 #bg-modal .modal-body #opt3 {
     background: white url('../images/cudriculado.jpg');
-    background-size: 100px;
+    background-size: 160px;
     background-position: center;
     background-repeat: repeat;
 }
 #bg-modal .modal-body #opt4 {
     background: white url('../images/triple-reglon.jpg');
-    background-size: 100px;
+    background-size: 280px;
     background-position: center;
     background-repeat: repeat;
 }
