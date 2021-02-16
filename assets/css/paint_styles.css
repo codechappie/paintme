@@ -90,7 +90,7 @@
 }
 #canvas.lined {
     background: #ffffff;
-    background-image: url('../images/triple-renglon.jpg');
+    background-image: url('../images/triple-reglon.jpg');
     background-size: 50px 30px;
     background-repeat: repeat;
     transition:  background .1s ease-in-out;
@@ -129,7 +129,7 @@
     background-repeat: repeat;
 }
 #bg-modal .modal-body #opt4 {
-    background: white url('../images/triple-renglon.jpg');
+    background: white url('../images/triple-reglon.jpg');
     background-size: 40px;
     background-position: center;
     background-repeat: repeat;

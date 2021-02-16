@@ -85,7 +85,7 @@ window.addEventListener("DOMContentLoaded", () => {
   btnBgLined.addEventListener("click", () => {
     canvas.style.background = "white";
     canvas.style.backgroundSize = "480px 289px";
-    canvas.style.backgroundImage = "url('https://raw.githubusercontent.com/codechappie/paintme/master/assets/images/triple-renglon.jpg')";
+    canvas.style.backgroundImage = "url('https://raw.githubusercontent.com/codechappie/paintme/master/assets/images/triple-reglon.jpg')";
     canvas.style.transition = "background .2s ease-in-out";
   });
   
