@@ -84,14 +84,14 @@
 #canvas.squared {
     background: #ffffff;
     background-image: url('../images/cudriculado.jpg');
-    background-size: 200px 200px;
+    background-size: 50px 50px;
     background-repeat: repeat;
     transition:  background .2s ease-in-out;
 }
 #canvas.lined {
     background: #ffffff;
     background-image: url('../images/triple-renglon.jpg');
-    background-size: 600px 600px;
+    background-size: 50px 30px;
     background-repeat: repeat;
     transition:  background .1s ease-in-out;
 }
@@ -124,13 +124,13 @@
 }
 #bg-modal .modal-body #opt3 {
     background: white url('../images/cudriculado.jpg');
-    background-size: 150px;
+    background-size: 50px;
     background-position: center;
     background-repeat: repeat;
 }
 #bg-modal .modal-body #opt4 {
     background: white url('../images/triple-renglon.jpg');
-    background-size: 200px;
+    background-size: 40px;
     background-position: center;
     background-repeat: repeat;
 }
