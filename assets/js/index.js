@@ -79,7 +79,7 @@ window.addEventListener("DOMContentLoaded", () => {
   btnBgSquared.addEventListener("click", () => {
     canvas.style.background = "white";
     canvas.style.backgroundSize = "458px 458px";
-    canvas.style.backgroundImage = "url('https://raw.githubusercontent.com/codechappie/paintme/master/assets/images/Cudriculado.jpg')";
+    canvas.style.backgroundImage = "url('https://raw.githubusercontent.com/codechappie/paintme/master/assets/images/cudriculado.jpg')";
     canvas.style.transition = "background .2s ease-in-out";
   });
   btnBgLined.addEventListener("click", () => {

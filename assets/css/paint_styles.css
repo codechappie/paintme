@@ -83,14 +83,14 @@
 }
 #canvas.squared {
     background: #ffffff;
-    background-image: url('../images/grid-pattern.png');
+    background-image: url('../images/cudriculado.jpg');
     background-size: 200px 200px;
     background-repeat: repeat;
     transition:  background .2s ease-in-out;
 }
 #canvas.lined {
     background: #ffffff;
-    background-image: url('../images/lined.png');
+    background-image: url('../images/triple-renglon.jpg');
     background-size: 600px 600px;
     background-repeat: repeat;
     transition:  background .1s ease-in-out;
