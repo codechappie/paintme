@@ -78,14 +78,14 @@ window.addEventListener("DOMContentLoaded", () => {
   });
   btnBgSquared.addEventListener("click", () => {
     canvas.style.background = "white";
-    canvas.style.backgroundSize = "200px 200px";
-    canvas.style.backgroundImage = "url('https://raw.githubusercontent.com/codechappie/paintme/master/assets/images/grid-pattern.png')";
+    canvas.style.backgroundSize = "500px 500px";
+    canvas.style.backgroundImage = "url('https://raw.githubusercontent.com/codechappie/paintme/master/assets/images/Cudriculado.jpg')";
     canvas.style.transition = "background .2s ease-in-out";
   });
   btnBgLined.addEventListener("click", () => {
     canvas.style.background = "white";
-    canvas.style.backgroundSize = "600px 600px";
-    canvas.style.backgroundImage = "url('https://raw.githubusercontent.com/codechappie/paintme/master/assets/images/lined.png')";
+    canvas.style.backgroundSize = "500px 500px";
+    canvas.style.backgroundImage = "url('https://raw.githubusercontent.com/codechappie/paintme/master/assets/images/triple-renglon.jpg')";
     canvas.style.transition = "background .2s ease-in-out";
   });
   
