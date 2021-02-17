@@ -10,6 +10,8 @@ window.addEventListener("DOMContentLoaded", () => {
   const btnBgWhite = document.querySelector("#opt2");
   const btnBgSquared = document.querySelector("#opt3");
   const btnBgLined = document.querySelector("#opt4");
+  const btnBgSquaredGreen = document.querySelector("#opt5");
+  const btnBgLinedGreen = document.querySelector("#opt6");
 
 
   const modalSize = document.querySelector("#size-modal");
@@ -78,11 +80,24 @@ window.addEventListener("DOMContentLoaded", () => {
   });
   btnBgSquared.addEventListener("click", () => {
     canvas.style.background = "white";
+    canvas.style.backgroundSize = "200px 200px";
+    canvas.style.backgroundImage = "url('https://raw.githubusercontent.com/codechappie/paintme/master/assets/images/grid-pattern.png')";
+    canvas.style.transition = "background .2s ease-in-out";
+  });
+  btnBgLined.addEventListener("click", () => {
+    canvas.style.background = "white";
+    canvas.style.backgroundSize = "600px 600px";
+    canvas.style.backgroundImage = "url('https://raw.githubusercontent.com/codechappie/paintme/master/assets/images/lined.png')";
+    canvas.style.transition = "background .2s ease-in-out";
+  });
+
+  btnBgSquaredGreen.addEventListener("click", () => {
+    canvas.style.background = "white";
     canvas.style.backgroundSize = "454px 454px";
     canvas.style.backgroundImage = "url('https://raw.githubusercontent.com/codechappie/paintme/master/assets/images/cudriculado.jpg')";
     canvas.style.transition = "background .2s ease-in-out";
   });
-  btnBgLined.addEventListener("click", () => {
+  btnBgLinedGreen.addEventListener("click", () => {
     canvas.style.background = "white";
     canvas.style.backgroundSize = "480px 289px";
     canvas.style.backgroundImage = "url('https://raw.githubusercontent.com/codechappie/paintme/master/assets/images/triple-reglon.jpg')";

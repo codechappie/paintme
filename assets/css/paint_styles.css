@@ -81,6 +81,8 @@
     background: #ffffff;
     transition:  background .2s ease-in-out;
 }
+
+
 #canvas.squared {
     background: #ffffff;
     background-image: url('../images/cudriculado.jpg');
@@ -122,6 +124,20 @@
 #bg-modal .modal-body #opt2 {
     background-color: white;
 }
+
+#bg-modal .modal-body #opt3 {
+    background: white url('../images/grid-pattern.png');
+    background-size: 150px;
+    background-position: center;
+    background-repeat: repeat;
+}
+#bg-modal .modal-body #opt4 {
+    background: white url('../images/lined.png');
+    background-size: 200px;
+    background-position: center;
+    background-repeat: repeat;
+}
+
 #bg-modal .modal-body #opt3 {
     background: white url('../images/cudriculado.jpg');
     background-size: 160px;
@@ -134,6 +150,7 @@
     background-position: center;
     background-repeat: repeat;
 }
+
 
 /** CSS SET UP */
 
