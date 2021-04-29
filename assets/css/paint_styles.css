@@ -241,7 +241,7 @@ a #color-selector{
 /** MODAL */
 .modal{
     position: absolute;
-    z-index: 2147483637;
+    z-index: 2147483659;
     background: #fff;
     color: #333;
     width: 500px;
